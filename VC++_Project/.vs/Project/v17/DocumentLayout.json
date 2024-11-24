@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{17A15CCA-6EEC-4330-8F28-8F23B9DDDD08}|Project\\Project.vcxproj|C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\Project\\PuzzlePiece.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17A15CCA-6EEC-4330-8F28-8F23B9DDDD08}|Project\\Project.vcxproj|solutionrelative:Project\\PuzzlePiece.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17A15CCA-6EEC-4330-8F28-8F23B9DDDD08}|Project\\Project.vcxproj|C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\Project\\Project.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17A15CCA-6EEC-4330-8F28-8F23B9DDDD08}|Project\\Project.vcxproj|solutionrelative:Project\\Project.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PuzzlePiece.cpp",
+              "DocumentMoniker": "C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\Project\\PuzzlePiece.cpp",
+              "RelativeDocumentMoniker": "Project\\PuzzlePiece.cpp",
+              "ToolTip": "C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\Project\\PuzzlePiece.cpp",
+              "RelativeToolTip": "Project\\PuzzlePiece.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-24T00:52:10.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Project.cpp",
+              "DocumentMoniker": "C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\Project\\Project.cpp",
+              "RelativeDocumentMoniker": "Project\\Project.cpp",
+              "ToolTip": "C:\\Users\\rla20\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\\uB9D0\uB625\uAC00\uB9AC\\VC-Project\\VC\u002B\u002B_Project\\Project\\Project.cpp",
+              "RelativeToolTip": "Project\\Project.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-24T00:52:08.788Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

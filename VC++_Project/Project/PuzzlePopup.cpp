@@ -1,53 +1,71 @@
 #include "PuzzlePopup.h"
 #include "Board.h"
-#include <cstdlib>  // rand(), srand()
-#include <ctime>    // time()
+#include <cstdlib>
+#include <ctime>
+
+std::vector<std::vector<int>> stageBoards[] = {
+    { // Stage 1
+        {1, 0, 0, 0},
+        {1, 1, 0, 0},
+        {1, 1, 1, 0},
+        {1, 1, 1, 1},
+    },
+    { // Stage 2
+        {0, 1, 1, 0, 0},
+        {1, 1, 1, 1, 0},
+        {1, 1, 1, 1, 0},
+        {0, 1, 1, 0, 0},
+    },
+};
 
 PuzzlePopup::PuzzlePopup(int rows, int cols) : rows(rows), cols(cols) {
     board = new Board(rows, cols);
-
-    // 랜덤 시드 초기화
-    srand((unsigned int)time(nullptr));
-
-    // 예시 퍼즐 조각 생성
-    GenerateExamplePuzzle();
+    srand((unsigned int)time(nullptr));  // 랜덤 시드 초기화
+    GenerateExamplePuzzle();  // 초기 퍼즐 생성
 }
 
 void PuzzlePopup::GenerateExamplePuzzle() {
-    // 예시로 사용할 퍼즐 조각들 정의
     std::vector<Block> blocks;
 
-    // 예시 퍼즐을 위한 고정된 블록 위치 (예시 퍼즐이 T자 모양)
-    blocks.push_back({ 5, 5, RGB(255, 0, 0) });  // 빨간색 T자
+    blocks.push_back({ 5, 7, RGB(255, 0, 0) });
     blocks.push_back({ 6, 5, RGB(255, 0, 0) });
     blocks.push_back({ 4, 5, RGB(255, 0, 0) });
     blocks.push_back({ 5, 4, RGB(255, 0, 0) });
 
-    // 퍼즐 조각을 생성하여 보드에 고정
-    PuzzlePiece* piece = new PuzzlePiece(blocks, RGB(255, 0, 0));  // 빨간색 T자 퍼즐
-    board->FixPiece(*piece);  // 생성된 퍼즐을 보드에 고정
+    PuzzlePiece* piece = new PuzzlePiece(blocks, RGB(255, 0, 0));
+    board->FixPiece(*piece);  // 보드에 퍼즐 고정
+}
+void RegisterPopupClass(HINSTANCE hInstance) {
+    WNDCLASS wc = {};
+    wc.lpfnWndProc = DefWindowProc;  // 기본 윈도우 절차
+    wc.hInstance = hInstance;
+    wc.lpszClassName = L"PuzzlePopupClass";
+    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);  // 배경 색상
+    wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+
+    if (!RegisterClass(&wc)) {
+        MessageBox(nullptr, L"Failed to register PuzzlePopupClass.", L"Error", MB_OK | MB_ICONERROR);
+    }
 }
 
+
 void PuzzlePopup::ShowPuzzle(HINSTANCE hInstance, HWND parentWindow, int stage) {
-    HWND popupWnd = CreateWindow(L"STATIC", L"Puzzle Popup", WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 400, 400,
+    RegisterPopupClass(hInstance);  // PuzzlePopupClass 등록
+
+    HWND popupWnd = CreateWindow(L"PuzzlePopupClass", L"Puzzle Popup",
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE,  // 이동 가능 스타일
+        CW_USEDEFAULT, CW_USEDEFAULT, 316, 400,
         parentWindow, nullptr, hInstance, nullptr);
 
-    // 퍼즐을 확인하는 버튼을 추가
-    CreateWindow(L"BUTTON", L"Confirm Puzzle", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-        150, 350, 100, 30, popupWnd, (HMENU)1, hInstance, nullptr);
+    if (!popupWnd) {
+        DWORD errorCode = GetLastError();
+        WCHAR errorMsg[256];
+        wsprintf(errorMsg, L"CreateWindow failed with error code: %lu", errorCode);
+        MessageBox(parentWindow, errorMsg, L"Error", MB_OK | MB_ICONERROR);
+        return;
+    }
 
-    // 현재 스테이지에 맞는 퍼즐 생성
-    board->GenerateRandomPuzzle(stage);  // 각 스테이지마다 다르게 퍼즐 생성
-
-    // 퍼즐을 그리기 위한 DC (Device Context) 얻기
     HDC hdc = GetDC(popupWnd);
-
-    // 작은 창에 퍼즐 그리기
-    board->Draw(hdc);
-
-    ReleaseDC(popupWnd, hdc);  // 그리기 후 DC 반납
-
-    ShowWindow(popupWnd, SW_SHOWNORMAL);
-    UpdateWindow(popupWnd);
+    board->Draw(hdc);  // 퍼즐판 그리기
+    ReleaseDC(popupWnd, hdc);
 }

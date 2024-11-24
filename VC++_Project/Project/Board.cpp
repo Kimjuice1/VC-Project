@@ -1,4 +1,3 @@
-// Board.cpp
 #include "Board.h"
 #include "PuzzlePiece.h"
 #include <cstdlib>
@@ -8,6 +7,9 @@
 Board::Board(int rows, int cols) : rows(rows), cols(cols), grid(rows, std::vector<COLORREF>(cols, RGB(255, 255, 255))) {
     srand((unsigned int)time(nullptr));  // 랜덤 시드 초기화
 }
+
+// 이후 내용은 원본 그대로 유지
+
 
 void Board::GenerateRandomPuzzle(int stage) {
     pieces.clear();  // 기존 퍼즐 조각들을 초기화
@@ -101,14 +103,12 @@ void Board::FixPiece(const PuzzlePiece& piece) {
 
 // 퍼즐을 맞추면 스테이지 클리어
 bool Board::CheckPuzzleComplete() {
-    // 예시 퍼즐 위치와 색상에 맞춰 비교
-    for (const auto& piece : pieces) {
-        for (const auto& block : piece.blocks) {
-            // 예시 블록 위치가 맞지 않으면 클리어 안 됨
-            if (block.x != 5 || block.y != 5) {
-                return false;  // 예시 퍼즐 블록이 맞지 않으면 false
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (stageBoards[currentStage - 1][i][j] == 1 && grid[i][j] == RGB(255, 255, 255)) {
+                return false; // 퍼즐판의 필요한 블록이 비어 있으면 실패
             }
         }
     }
-    return true;  // 모든 블록이 맞다면 true
+    return true;
 }

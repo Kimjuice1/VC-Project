@@ -1,8 +1,12 @@
-// Board.h
 #pragma once
 #include <vector>
 #include <windows.h>
-#include "PuzzlePiece.h"  // PuzzlePiece 정의 포함
+#include "PuzzlePiece.h"
+
+extern std::vector<std::vector<int>> stageBoards[];
+
+// currentStage 전역 변수 선언
+extern int currentStage;
 
 class Board {
 public:
@@ -15,5 +19,5 @@ public:
     void GenerateRandomPuzzle(int stage);  // 랜덤 퍼즐 생성
     void FixPiece(const PuzzlePiece& piece);  // 퍼즐 조각 고정
     bool CheckFit(const PuzzlePiece& piece);  // 퍼즐 조각이 맞는지 확인
-    bool CheckPuzzleComplete();  // 퍼즐이 완성되었는지 확인
+    bool CheckPuzzleComplete();
 };

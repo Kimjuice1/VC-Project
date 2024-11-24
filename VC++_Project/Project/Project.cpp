@@ -108,7 +108,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, 587, 630, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -135,7 +135,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     switch (message) {
     case WM_CREATE:
         // 첫 번째 스테이지에 맞는 퍼즐 띄우기
-        board = new Board(20, 10);  // 보드 크기 설정
+        board = new Board(19, 19);  // 보드 크기 설정
         puzzlePopup = new PuzzlePopup(20, 10);
         puzzlePopup->ShowPuzzle(hInst, hWnd, currentStage);  // 첫 번째 스테이지 퍼즐 표시
         currentPiece = new PuzzlePiece({ {0, 0}, {1, 0}, {0, 1} }, RGB(255, 0, 0));  // 초기 조각
@@ -168,11 +168,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
             currentPiece->Move(0, 1);
             if (!board->CheckFit(*currentPiece)) currentPiece->Move(0, -1);
             break;
-        case VK_SPACE: // 고정 및 스테이지 클리어
-            if (board->CheckPuzzleComplete()) {  // 퍼즐 맞추면 클리어
-                MessageBox(hWnd, L"Stage Clear! Proceed to next stage.", L"Stage Complete", MB_OK);
-                currentStage++;  // 다음 스테이지로 넘어감
-                puzzlePopup->ShowPuzzle(hInst, hWnd, currentStage);  // 새로운 스테이지 퍼즐 표시
+        case VK_SPACE:
+            if (board->CheckFit(*currentPiece)) {
+                board->FixPiece(*currentPiece);  // 현재 블록 고정
+                delete currentPiece;  // 기존 블록 삭제
+                currentPiece = new PuzzlePiece({ {0, 0}, {1, 0}, {0, 1} }, RGB(rand() % 256, rand() % 256, rand() % 256));  // 새 블록 생성
             }
             break;
         }

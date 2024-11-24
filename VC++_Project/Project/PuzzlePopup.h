@@ -1,4 +1,3 @@
-// PuzzlePopup.h
 #pragma once
 #include <windows.h>
 #include "Board.h"
