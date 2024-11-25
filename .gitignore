@@ -1,0 +1,15 @@
+# Visual Studio 관련 파일 및 디렉토리
+.vs/
+*.suo
+*.db
+*.ipch
+*.log
+
+# 빌드 결과물
+x64/
+*.obj
+*.exe
+*.ilk
+*.pdb
+*.tlog
+*.lastbuildstate
