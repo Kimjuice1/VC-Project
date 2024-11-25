@@ -172,12 +172,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
             if (board->CheckFit(*currentPiece)) {
                 board->FixPiece(*currentPiece);  // 현재 블록 고정
                 delete currentPiece;  // 기존 블록 삭제
-                currentPiece = new PuzzlePiece({ {0, 0}, {1, 0}, {0, 1} }, RGB(rand() % 256, rand() % 256, rand() % 256));  // 새 블록 생성
+                currentPiece = new PuzzlePiece({ {0, 0}, {1, 1}, {0, 1} }, RGB(rand() % 256, rand() % 256, rand() % 256));  // 새 블록 생성
             }
             break;
         }
 
-        InvalidateRect(hWnd, NULL, TRUE);  // 화면을 다시 그리도록 요청
+        InvalidateRect(hWnd, NULL, FALSE);  // 화면을 다시 그리도록 요청
         break;
 
     case WM_DESTROY:
