@@ -13,6 +13,9 @@ public:
     int offsetX, offsetY;      // 화면에서의 현재 위치
 
     PuzzlePiece(const std::vector<Block>& blocks, COLORREF color);
-    void Move(int dx, int dy); // 조각을 이동
-    void Draw(HDC hdc) const;  // 조각을 화면에 그림 (const로 수정)
+    PuzzlePiece(const std::vector<std::vector<int>>& stageData, int startX, int startY, COLORREF color); // 새 생성자
+    void Move(int dx, int dy);
+    void Draw(HDC hdc) const;
 };
+
+PuzzlePiece* GeneratePieceFromStage(const std::vector<std::vector<int>>& stageData, COLORREF color);

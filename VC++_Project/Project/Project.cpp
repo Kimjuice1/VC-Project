@@ -19,6 +19,8 @@ bool isDragging = false;
 POINT lastMousePos = { 0, 0 };
 PuzzlePopup* puzzlePopup;
 int currentStage = 1;
+int boardRows = 19; 
+int boardCols = 19;
 
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -135,8 +137,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
     switch (message) {
     case WM_CREATE:
         // 첫 번째 스테이지에 맞는 퍼즐 띄우기
-        board = new Board(19, 19);  // 보드 크기 설정
-        puzzlePopup = new PuzzlePopup(20, 10);
+        board = new Board(boardRows, boardCols);  // 보드 크기 설정
+        puzzlePopup = new PuzzlePopup(boardRows, boardCols);
         puzzlePopup->ShowPuzzle(hInst, hWnd, currentStage);  // 첫 번째 스테이지 퍼즐 표시
         currentPiece = new PuzzlePiece({ {0, 0}, {1, 0}, {0, 1} }, RGB(255, 0, 0));  // 초기 조각
         break;

@@ -19,9 +19,8 @@ std::vector<std::vector<int>> stageBoards[] = {
 };
 
 PuzzlePopup::PuzzlePopup(int rows, int cols) : rows(rows), cols(cols) {
-    board = new Board(rows, cols);
+    board = new Board(rows, cols);  // 메인 보드와 동일한 크기 설정
     srand((unsigned int)time(nullptr));  // 랜덤 시드 초기화
-    GenerateExamplePuzzle();  // 초기 퍼즐 생성
 }
 
 void PuzzlePopup::GenerateExamplePuzzle() {
@@ -50,11 +49,15 @@ void RegisterPopupClass(HINSTANCE hInstance) {
 
 
 void PuzzlePopup::ShowPuzzle(HINSTANCE hInstance, HWND parentWindow, int stage) {
-    RegisterPopupClass(hInstance);  // PuzzlePopupClass 등록
+    RegisterPopupClass(hInstance);
+
+    int cellSize = 30;  // 각 셀의 크기
+    int windowWidth = cols * cellSize + 16;  // 열 * 셀 크기 + 여유(테두리)
+    int windowHeight = rows * cellSize + 39; // 행 * 셀 크기 + 여유(제목 표시줄)
 
     HWND popupWnd = CreateWindow(L"PuzzlePopupClass", L"Puzzle Popup",
-        WS_OVERLAPPEDWINDOW | WS_VISIBLE,  // 이동 가능 스타일
-        CW_USEDEFAULT, CW_USEDEFAULT, 316, 400,
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+        CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight,
         parentWindow, nullptr, hInstance, nullptr);
 
     if (!popupWnd) {
@@ -66,6 +69,6 @@ void PuzzlePopup::ShowPuzzle(HINSTANCE hInstance, HWND parentWindow, int stage) 
     }
 
     HDC hdc = GetDC(popupWnd);
-    board->Draw(hdc);  // 퍼즐판 그리기
+    board->Draw(hdc);  // 보드 그리기
     ReleaseDC(popupWnd, hdc);
 }
