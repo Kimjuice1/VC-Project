@@ -4,6 +4,8 @@
 *.db
 *.ipch
 *.log
+*.idb
+*.json
 
 # 빌드 결과물
 x64/
